@@ -31,7 +31,7 @@ class Message(models.Model):
 
 class Sending(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название рассылки")
-    time_first_mailing = models.DateTimeField(auto_now_add=True, verbose_name="Начало рассылки")
+    time_first_mailing = models.DateTimeField(verbose_name="Начало рассылки")
     periodicity = models.CharField(max_length=50, choices=PERIODICITY_CHOICES, verbose_name="Периодичность рассылки")
     sending_status = models.CharField(
         max_length=50,
@@ -61,7 +61,7 @@ class Status(models.Model):
     )
 
     def __str__(self):
-        return f""
+        return f"{self.time}, {self.sending} отправлялась {self.status}, ответ сервиса: {self.service_response}"
 
     class Meta:
         verbose_name = "Статус отправки"

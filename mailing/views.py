@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from client.models import Client
 from mailing.forms import MessageForm, SendingForm
-from mailing.models import Sending, Message
+from mailing.models import Sending, Message, Status
 
 
 # ListView
@@ -16,6 +16,10 @@ class SendingListView(ListView):
 
 class MessageListView(ListView):
     model = Message
+
+
+class StatusListView(ListView):
+    model = Status
 
 
 # DetailView

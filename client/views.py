@@ -19,11 +19,6 @@ class ClientListView(ListView):
 class ClientDetailView(DetailView):
     model = Client
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        print(f'клиентdetail:{context_data}')
-        return context_data
-
 
 class ClientCreateView(CreateView):
     model = Client
