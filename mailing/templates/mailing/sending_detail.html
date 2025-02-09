@@ -10,10 +10,10 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <strong>Сообщение : {{object.message}} </strong>
+                        <strong>Сообщение :  </strong><li>{{object.message}}</li>
                     </ul>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                         <li>Получатели:</li>
+                         <strong>Получатели:</strong>
                         {% for client in clients_all %}
                             {% if client in object.clients.all %}
                                 <li>{{ client }}</li>
@@ -21,7 +21,8 @@
                         {% endfor %}
                     </ul>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <strong>Статус : {{object.status}} </strong>
+                        <strong>Статус : </strong><li>{{object.sending_status}} </li>
+                        <strong>Дата следующей рассылки: </strong><li>{{object.time_first_mailing}}</li>
                     </ul>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -9,11 +10,7 @@ from client.models import Client
 # Create your views here.
 class ClientListView(ListView):
     model = Client
-
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        print(f'клиентлист :{context_data}')
-        return context_data
+    permission_required = 'client.view_client'
 
 
 class ClientDetailView(DetailView):
@@ -24,6 +21,15 @@ class ClientCreateView(CreateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy("client:client_list")
+
+    def form_valid(self, form):
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.creator = self.request.user
+            self.object.save()
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
 
 class ClientUpdateView(UpdateView):
